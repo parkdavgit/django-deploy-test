@@ -7,7 +7,6 @@ After=syslog.target
 [Service]
 
 ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/django-deploy-test/.config/uwsgi/mysite.ini
-ExecStopPost=/bin/rm -f /run/nginx.pid
 
 Restart=always
 
