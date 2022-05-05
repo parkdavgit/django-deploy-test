@@ -19,7 +19,9 @@ def home(request):
     # 페이징처리
     #paginator = Paginator(question_list, 7)
     #page_obj = paginator.get_page(page)
-    return render(request, 'home.html',{'question_list'})
+   
+    page_obj = 1
+    return render(request, 'home.html',{'question_list':page_obj})
 
 
 
