@@ -7,12 +7,12 @@ from django.utils import timezone
 from .forms import NewQuestionForm 
 from django.contrib import messages
 
-#def home(request): 
-   
-    #return render(request, 'home.html')
-
 def home(request): 
-    question_list = Question.objects.order_by('subject') 
+   
+    return render(request, 'home.html')
+
+#def home(request): 
+    #question_list = Question.objects.order_by('subject') 
     # 입력 파라미터
     #page = request.GET.get('page','1')
      
@@ -22,7 +22,7 @@ def home(request):
    
     #page_obj = 1
     #return render(request, 'home.html',{'question_list':page_obj})
-    return render(request, 'home.html')
+    #return render(request, 'home.html')
 
 
 
