@@ -20,9 +20,9 @@ def home(request):
     #paginator = Paginator(question_list, 7)
     #page_obj = paginator.get_page(page)
    
-    page_obj = 1
-    return render(request, 'home.html',{'question_list':page_obj})
-
+    #page_obj = 1
+    #return render(request, 'home.html',{'question_list':page_obj})
+    return render(request, 'home.html')
 
 
 
