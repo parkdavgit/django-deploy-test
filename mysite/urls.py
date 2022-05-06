@@ -20,8 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     
     path('', include('main.urls')), ## 추가된 부분
-    path('admin/', admin.site.urls),
-    path('account/',include('account.urls')) ## 추가된 부분   
-     
+    
+    path('account/',include('account.urls')), ## 추가된 부분   
+    path('admin/', admin.site.urls), 
 ]
   
