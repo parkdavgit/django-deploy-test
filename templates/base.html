@@ -10,7 +10,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
  
 <!-- 스크립트를 사용하기 위한 블록 선언 ###-->
-   
+  {% block script %}
+  {% endblock %}
 
 </head>
 
@@ -24,23 +25,24 @@
 
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-       
-      <li>Hello </li>
+      {% if user.is_authenticated %}
+      <li>Hello, {{user.first_name}}</li>
       <li class="nav-item">
-      <a class="nav-link" href="#">로그아웃</a>
+      <a class="nav-link" href="/account/logout">로그아웃</a>
       </li>  
-       
+      {% else %}
+
 
          
       <li class="nav-item">
-        <a class="nav-link" href="#">회원가입</a>
+        <a class="nav-link" href="/account/register">회원가입</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">로그인</a>
+        <a class="nav-link" href="/account/login">로그인</a>
       </li>
 
-       
+      {% endif %}  
        
     </ul>
   </div>
@@ -49,10 +51,9 @@
   </nav>
   <br>
   
-  {% block contents %}
-  {% endblock %}
-   
  
+{% block contents %}
+{% endblock %}
 
 </body>
 </html>
