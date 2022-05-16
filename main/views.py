@@ -3,5 +3,5 @@ from django.shortcuts import get_object_or_404, render, redirect ## 추가된 �
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 
-def home(request): 
-    return render(request, 'home.html')
+def index(request): 
+    return render(request, 'index.html')
