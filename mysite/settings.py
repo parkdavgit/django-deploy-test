@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', ## 추가된 부분
         'NAME': 'test_db', ## 추가된 부분
-        'USER': 'kim', ## 추가된 부분
+        'USER': 'pak', ## 추가된 부분
         'PASSWORD':'1234', ## 추가된 부분 
         'HOST':'18.188.208.156' ## 추가된 부분
     }
