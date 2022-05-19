@@ -1,0 +1,64 @@
+<!-- 첫페이지로 돌아가기 -->
+<nav aria-label="pagination" class="mb-4">
+    <ul class="pagination justify-content-center">
+   {% if question_list.number > 1 %}
+   <li class="page-item">
+   <a class="page-link" href="?page=1">처음</a>
+   </li>
+   {% else %}
+   <li class="page-item disabled">
+   <span class="page-link">처음</span>
+   </li>
+   {% endif %}
+   
+    <!-- 이전 페이지 구현-->
+   {% if question_list.has_other_pages %}
+     {% if question_list.has_previous %}
+     <li class="page-item">
+        <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
+     </li>
+     {% else %}
+     <li class="page-item disabled">
+      <span class="page-link">이전</span>
+     </li>
+     {% endif %}
+   
+   <!-- 페이징 구현-->
+    {% for page_num in question_list.paginator.page_range %}
+     {% if question_list.number == page_num %}
+     <li class="page-item active">
+      <span class="page-link">{{ page_num }}
+       <span class="sr-only">(current)</span>
+      </span>
+     </li>
+     {% elif page_num > question_list.number|add:'-4' and page_num < question_list.number|add:'4' %}
+     <li class="page-item">
+      <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+     </li>
+     {% endif %}
+   {% endfor %}
+   
+    <!-- 다음 페이지 구현-->
+     {% if question_list.has_next %}
+     <li class="page-item">
+        <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
+     </li>
+     {% else %}
+     <li class="page-item disabled">
+      <span class="page-link">다음</span>
+     </li>
+     {% endif %}
+   {% endif %}
+   
+   <!-- 끝으로 돌아가기 -->
+    {% if question_list.number != question_list.paginator.num_pages %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ question_list.paginator.num_pages }}">끝</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">끝</span>
+    </li>
+    {% endif %}
+   </ul>
+   </nav>

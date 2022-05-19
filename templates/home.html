@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<div class="container my-3">
+ <table class="table">
+ <thead class="thead-dark">
+ <tr>
+ <th>순서</th>
+ <th>추천</th>
+ <th>제목</th>
+ <th>작성자</th>
+ <th>작성일</th>
+
+ </tr>
+ </thead>
+  <tbody>
+
+ 
+ {% for question in question_list %}
+   <tr>
+   <td>{{ question.id }}</td>
+   <td>{{ question.voter.count }}</td> 
+     
+   <td><a href="#">{{ question.subject }}</a>
+    {% if question.answer_set.count > 0 %}
+    <small class="text-danger ml-3">{{ question.answer_set.count }}</small>
+   {% endif %} 
+
+   </td>
+
+  
+   <!-- 수정 -->
+   <td> {{ question.author }} </td>
+  <!-- 수정 -->
+    <td> {{ question.create_at }} </td>
+    </tr>
+
+ {% endfor %}
+
+ {% include 'includes/paginator.html' %}
+  </tbody>
+  </table>
+ 
+<!--## 추가 ## -->
+<a href="#" class="btn btn-primary float-right">질문 등록</a> 
+</div>
+
+{% endblock %}
+  
