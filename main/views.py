@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-def home(request): 
+def index(request): 
     question_list = Question.objects.order_by('-create_at') 
     # 입력 파라미터
     page = request.GET.get('page','1')
@@ -14,4 +14,4 @@ def home(request):
     # 페이징처리
     paginator = Paginator(question_list, 7)
     page_obj = paginator.get_page(page)
-    return render(request, 'home.html',{'question_list':page_obj})
+    return render(request, 'index.html',{'question_list':page_obj})
