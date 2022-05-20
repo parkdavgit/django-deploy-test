@@ -30,3 +30,23 @@ def question_create(request):
     else:
         form = NewQuestionForm()
     return render(request, 'question_create.html', {'form':form})
+
+
+def answer_create(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.question = question
+            answer.create_at = timezone.now()
+
+            answer.author = request.user         ### 추가 ####
+ 
+            answer.save()
+            return redirect('question_detail',question_id=question_id)  
+
+    else:
+        form = AnswerForm()
+    context = {'question':question,'form':form}
+    return render(request, 'view_question.html',context)     
