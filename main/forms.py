@@ -1,5 +1,5 @@
 from django import forms
-from .models import Question 
+from .models import Question, Answer 
 
 
 class NewQuestionForm(forms.ModelForm):
@@ -17,4 +17,9 @@ class NewQuestionForm(forms.ModelForm):
         model = Question
         fields = ['subject', 'content']
 
- 
+class AnswerForm(forms.ModelForm):
+    content = forms.Textarea()
+
+    class Meta:
+        model = Answer
+        fields = ['content',]
