@@ -31,6 +31,10 @@ def question_create(request):
         form = NewQuestionForm()
     return render(request, 'question_create.html', {'form':form})
 
+def question_detail(request, question_id):
+    question = get_object_or_404(Question,id=question_id)
+    return render(request, 'view_question.html', {'question':question})
+
 
 def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
