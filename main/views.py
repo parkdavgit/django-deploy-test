@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect ## 추가된 부분
 from .models import Question ## 추가된 부분
 from django.utils import timezone
-from .forms import NewQuestionForm, AnswerForm 
+from .forms import NewQuestionForm 
 from django.core.paginator import Paginator 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -36,21 +36,4 @@ def question_detail(request, question_id):
     return render(request, 'view_question.html', {'question':question})
 
 
-def answer_create(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            answer = form.save(commit=False)
-            answer.question = question
-            answer.create_at = timezone.now()
-
-            answer.author = request.user         ### 추가 ####
- 
-            answer.save()
-            return redirect('question_detail',question_id=question_id)  
-
-    else:
-        form = AnswerForm()
-    context = {'question':question,'form':form}
-    return render(request, 'view_question.html',context)     
+    

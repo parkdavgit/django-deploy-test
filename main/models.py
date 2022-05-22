@@ -15,7 +15,7 @@ class Question(models.Model):
 
   
 
-class Quest(models.Model):
+class Answer(models.Model):
     subject = models.CharField(max_length=100)
     content = models.TextField()
     
