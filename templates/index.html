@@ -21,12 +21,7 @@
    <td>{{ question.id }}</td>
    <td>{{ question.voter.count }}</td> 
      
-   <td><a href="#">{{ question.subject }}</a>
-    {% if question.answer_set.count > 0 %}
-    <small class="text-danger ml-3">{{ question.answer_set.count }}</small>
-   {% endif %} 
-
-   </td>
+   <td><a href="#">{{ question.subject }}</a></td>
 
   
    <!-- 수정 -->
