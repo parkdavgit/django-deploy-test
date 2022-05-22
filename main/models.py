@@ -15,7 +15,7 @@ class Question(models.Model):
 
   
 
-class Ans(models.Model):
+class Test(models.Model):
     subject = models.CharField(max_length=100)
     content = models.TextField()
     
