@@ -15,10 +15,4 @@ class Question(models.Model):
 
   
 
-class Test(models.Model):
-    subject = models.CharField(max_length=100)
-    content = models.TextField()
-    
  
-    def __str__(self):
-        return self.subject        
