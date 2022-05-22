@@ -13,14 +13,7 @@ class Question(models.Model):
     def __str__(self):
         return self.subject
 
-class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    content = models.TextField()
-     
-
-    def __str__(self):
-        return self.content    
-
+  
 
 class Quest(models.Model):
     subject = models.CharField(max_length=100)
