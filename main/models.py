@@ -25,12 +25,13 @@ class Item(models.Model):
 	def __str__(self):
 		return self.title 
 
-class Cost(models.Model):
-	 
-	title1= models.CharField(max_length=100)
-	price1= models.FloatField()
-	offer1= models.BooleanField(default=False)
+class Dreamreal(models.Model):
 
-	def __str__(self):
-		return self.title      
+   website = models.CharField(max_length = 50)
+   mail = models.CharField(max_length = 50)
+   name = models.CharField(max_length = 50)
+   phonenumber = models.IntegerField()
+
+   class Meta:
+      db_table = "dreamreal"
  
