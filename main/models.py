@@ -34,4 +34,4 @@ class Dreamreal(models.Model):
 
    class Meta:
       db_table = "dreamreal"
- 
+   
