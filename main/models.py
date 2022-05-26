@@ -23,5 +23,16 @@ class Item(models.Model):
 	offer= models.BooleanField(default=False)
 
 	def __str__(self):
-		return self.title        
+		return self.title 
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    content = models.TextField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE) # 추가
+    modify_at = models.DateTimeField(null=True, blank=True) #추가
+    #voter = models.ManyToManyField(User, related_name='voter_answer')
+
+    def __str__(self):
+        return self.content                       
  
