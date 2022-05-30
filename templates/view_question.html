@@ -33,14 +33,19 @@
  <h5>{{ question.subject }}</h5>
  <p>{{ question.content|safe}}</p>-->
 
-  
+ {% if question.modify_at %}
+    <div>수정일: {{ question.modify_at }}</div>
+    <div>작성일: {{ question.create_at }}</div>
+    {% else %}
+    <div>작성일: {{ question.create_at }}</div>
+    {% endif %}  
 
   
  
 <a href="{% url 'index' %}" class="btn btn-secondary">돌아가기</a>
-<a href="#" class="btn btn-sm btn-outline-secondary">수정</a>
+<a href="{% url 'question_modify' question.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
  
-<a href="#"
+<a href="{% url 'question_delete' question.id %}"
        class="delete btn btn-sm btn-outline-info">삭제</a>
 
  
