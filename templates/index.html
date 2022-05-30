@@ -21,9 +21,7 @@
    <td>{{ question.voter.count }}</td> 
       
    <td><a href="{% url 'question_detail' question.id %}">{{ question.subject }}</a>
-     {% if question.answer_set.count > 0 %}
-     <small class="text-danger ml-3">{{ question.answer_set.count }}</small>
-  {% endif %} 
+     
 
   
    <!-- 수정 -->
