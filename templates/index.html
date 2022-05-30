@@ -14,23 +14,26 @@
  </tr>
  </thead>
   <tbody>
-
- 
- {% for question in question_list %}
+  
+  {% for question in question_list %}
    <tr>
    <td>{{ question.id }}</td>
    <td>{{ question.voter.count }}</td> 
-     
-   <td><a href="#">{{ question.subject }}</a></td>
+      
+   <td><a href="{% url 'question_detail' question.id %}">{{ question.subject }}</a>
+     {% if question.answer_set.count > 0 %}
+     <small class="text-danger ml-3">{{ question.answer_set.count }}</small>
+  {% endif %} 
 
   
    <!-- 수정 -->
    <td> {{ question.author }} </td>
   <!-- 수정 -->
-    <td> {{ question.create_at }} </td>
-    </tr>
+   <td> {{ question.create_at }} </td>
+   </tr>
 
  {% endfor %}
+
 
  {% include 'includes/paginator.html' %}
   </tbody>
