@@ -63,5 +63,14 @@ def question_delete(request, question_id):
         messages.error(request, '삭제권한이 없습니다')
         return redirect('question_detail', question_id=question_id)
     question.delete()
-    return redirect('index') 
+    return redirect('index')
+
+
+def vote_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user == question.author:
+        messages.error(request, '자신이 작성한 글에는 추천할 수 없습니다.')
+    else:
+        question.voter.add(request.user)
+    return redirect('question_detail', question_id=question_id)           
     
