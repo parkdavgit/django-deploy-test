@@ -79,7 +79,6 @@ def item_create(request):
         form = NewItemForm(request.POST)
         if form.is_valid():
             item = form.save(commit=False)
-            
             item.save()
             return redirect('index')
     else:

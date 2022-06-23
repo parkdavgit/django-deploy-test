@@ -21,9 +21,8 @@ class Item(models.Model):
 	title= models.CharField(max_length=100)
 	price= models.FloatField()
 	offer= models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-	
-    def __str__(self):
+    
+	def __str__(self):
 		return self.title 
 
 class Dreamreal(models.Model):
