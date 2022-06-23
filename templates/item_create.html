@@ -10,7 +10,7 @@
 
     
      <div class="form-group">
-         <label for="title">제목</label>
+         <label for="title">Item</label>
          <input type="text" class="form-control" name="title" id="title"
                 value="{{ form.title.value|default_if_none:'' }}">
      </div>
@@ -22,7 +22,12 @@
         value="{{ form.price.value|default_if_none:'' }}">
     </div>
 
-       
+    <div class="form-group">
+        <label for="title">Offer</label>
+        <input type="checkbox" class="form-control" name="offer" id="offer"
+               value="{{ form.offer.value|default_if_none:'' }}">
+    </div>
+     
   
     <button type="submit" class="btn btn-primary">저장하기</button>
     <a href="{%url 'index'%}" class="btn btn-secondary">돌아가기</a>
