@@ -28,9 +28,14 @@ class NewItemForm(forms.ModelForm):
     offer = forms.BooleanField(
         label='offer'
     )
+    qprice = forms.FloatField(
+        label='qprice'
+    )
+
+
 
 ## 어떤 모델을 사용하고 모델에서 사용할 속성을 지정 합니다 ##
     class Meta:
         model = Item
-        fields = ['title', 'price', 'offer']
+        fields = ['title', 'price', 'offer','qprice']
  
