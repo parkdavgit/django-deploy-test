@@ -21,7 +21,7 @@ class Item(models.Model):
 	title= models.CharField(max_length=100)
 	price= models.FloatField()
 	offer= models.BooleanField(default=False)
-    qprice= models.FloatField()
+    
     
 	def __str__(self):
 		return self.title 
@@ -32,6 +32,7 @@ class Dreamreal(models.Model):
    mail = models.CharField(max_length = 50)
    name = models.CharField(max_length = 50)
    phonenumber = models.IntegerField()
+   qprice= models.FloatField()
 
    class Meta:
       db_table = "dreamreal"
