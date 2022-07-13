@@ -25,15 +25,11 @@ class NewItemForm(forms.ModelForm):
     price = forms.FloatField(
         label='Price'
     )
-    offer = forms.BooleanField(
-		default=False,
-        label='offer'
-    )
-
+   
 
 
 ## 어떤 모델을 사용하고 모델에서 사용할 속성을 지정 합니다 ##
     class Meta:
         model = Item
-        fields = ['title', 'price', 'offer']
+        fields = ['title', 'price']
  
