@@ -26,9 +26,9 @@ class NewItemForm(forms.ModelForm):
         label='Price'
     )
     offer = forms.BooleanField(
+		default=False,
         label='offer'
     )
-    
 
 
 
