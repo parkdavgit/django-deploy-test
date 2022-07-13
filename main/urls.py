@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^board/question_modify/(?P<question_id>\d+)/$', views.question_modify, name='question_modify'),
     url(r'^board/question_delete/(?P<question_id>\d+)/$', views.question_delete, name='question_delete'),
     url(r'^vote/question/(?P<question_id>\d+)/$', views.vote_question, name='vote_question'),
-    url(r'^board/item_create/$', views.item_create, name='item_create'), ## 추가 ##
+    url(r'^itemlist/item_create/$', views.item_create, name='item_create'), ## 추가 ##
 ] 
 
  
