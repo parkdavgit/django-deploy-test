@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect ## 추가된 부분
-from .models import Question, Item ## 추가된 부분
+from .models import Question
 from django.utils import timezone
 from .forms import NewQuestionForm 
 from django.core.paginator import Paginator 
