@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect ## 추가된 부분
 from .models import Question, Item ## 추가된 부분
 from django.utils import timezone
-from .forms import NewQuestionForm, NewItemForm 
+from .forms import NewQuestionForm 
 from django.core.paginator import Paginator 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -74,14 +74,3 @@ def vote_question(request, question_id):
         question.voter.add(request.user)
     return redirect('question_detail', question_id=question_id)
 
-def item_create(request):
-    if request.method == 'POST':
-        form = NewItemForm(request.POST)
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.save()
-            return redirect('index')
-    else:
-        form = NewItemForm()
-    return render(request, 'item_create.html', {'form':form})
-    
