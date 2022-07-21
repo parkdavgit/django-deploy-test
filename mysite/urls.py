@@ -22,6 +22,7 @@ urlpatterns = [
     path('account/', include('account.urls')), ##
     path('', include('ecpoll.urls')), ## 추가된 부분
     #path('admin/', admin.site.urls),
-]
+    
+    ]
 
  
