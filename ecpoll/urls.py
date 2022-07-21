@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from main import views 
+from ecpoll import views 
 
 urlpatterns = [
     #url(r'^$', views.home, name='home'), Don't do this
