@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+ 
+{% block contents %}
+
+
+ 
+<div class="container my-3">
+   <table class="table">
+
+   <thead class="thead-dark">
+    <tr>
+    <th>순서</th>
+    <th>질문</th>
+    <th>Active</th>
+    <th>작성일</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+{% for poll in polls %}
+   <tr>
+   <td>{{ poll.id }}</td>
+   <td><a href="#">{{ poll.text|truncatewords:5}}</a>{% if request.user == poll.owner %}
+   
+   {% if poll.active %}
+      <a href="#" data-toggle="tooltip" data-placement="top" title="End Poll"
+          onclick="return confirm('Are you sure ?')"><i class="fas fa-step-forward float-right btn btn-danger btn-sm">End</i></a>
+      {% endif %} 
+      <a href="#" class="mr-3" data-toggle="tooltip" data-placement="top"
+      title="Edit Poll"><i class="fas fa-pencil-alt float-right btn btn-primary btn-sm mr-1">Edit</i></a>
+      {% endif %}  
+
+
+   </td> 
+    
+   <td> {{ poll.active }} </td>
+   <td> {{ poll.pub_date }} </td>
+   </tr>
+
+ {% endfor %}
+ {% include 'includes/paginator.html' %}
+   </tbody>
+   </table>
+
+</div>   
+<a class="btn btn-primary mb-3 float-right" href="#" role="button">Add <i class="fas fa-plus"></i></a> 
+{% endblock %}
