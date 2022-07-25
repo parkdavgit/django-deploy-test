@@ -32,7 +32,7 @@ def user_list(request):
 
 @login_required()
 def polls_add(request):
-    if request.user.has_perm('poll2.add_poll'):#super user appname and url
+    if request.user.has_perm('ecpoll.add_poll'):#super user appname and url
         if request.method == 'POST':
             form = PollAddForm(request.POST)
             if form.is_valid:
