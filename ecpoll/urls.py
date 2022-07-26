@@ -7,3 +7,5 @@ urlpatterns = [
     url(r'^user_list/$', views.user_list, name='user_list'),
     url(r'^add/$', views.polls_add, name='add'),
    ] 
+
+     
