@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
-from .models import Poll, Choice, Vote
+from .models import Poll, Choice
 
 from .forms import PollAddForm,EditPollForm,ChoiceAddForm
 from django.contrib import messages
@@ -82,72 +82,6 @@ def poll_detail(request, poll_id):
     return render(request, 'poll_detail.html', context)
 
 
-@login_required
-def poll_vote(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    choice_id = request.POST.get('choice')
-    if not poll.user_can_vote(request.user):
-        messages.error(
-            request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
-        return redirect("user_list")
-
-    if choice_id:
-        choice = Choice.objects.get(id=choice_id)
-        vote = Vote(user=request.user, poll=poll, choice=choice)
-        vote.save()
-        print(vote)
-        return render(request, 'poll_result.html', {'poll': poll})
-    else:
-        messages.error(
-            request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
-        return redirect("detail", poll_id)
-    return render(request, 'poll_result.html', {'poll': poll})     
-
-
-
-@login_required
-def endpoll(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    if request.user != poll.owner:
-        return redirect('home')
-
-    if poll.active is True:
-        poll.active = False
-        poll.save()
-        return render(request, 'poll_result.html', {'poll': poll})
-    else:
-        return render(request, 'poll_result.html', {'poll': poll})  
-
-
-@login_required
-def polls_edit(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    if request.user != poll.owner:
-        return redirect('home')
-
-    if request.method == 'POST':
-        form = EditPollForm(request.POST, instance=poll)
-        if form.is_valid:
-            form.save()
-            messages.success(request, "Poll Updated successfully.",
-                             extra_tags='alert alert-success alert-dismissible fade show')
-            return redirect("user_list")
-
-    else:
-        form = EditPollForm(instance=poll)
-
-    return render(request, "poll_edit.html", {'form': form, 'poll': poll}) 
-
-@login_required
-def polls_delete(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    if request.user != poll.owner:
-        return redirect('home')
-    poll.delete()
-    messages.success(request, "Poll Deleted successfully.",
-                     extra_tags='alert alert-success alert-dismissible fade show')
-    return redirect("user_list") 
-
 
 @login_required
 def add_choice(request, poll_id):
@@ -171,43 +105,6 @@ def add_choice(request, poll_id):
     }
     return render(request, 'add_choice.html', context) 
 
-@login_required
-def choice_delete(request, choice_id):
-    choice = get_object_or_404(Choice, pk=choice_id)
-    poll = get_object_or_404(Poll, pk=choice.poll.id)
-    if request.user != poll.owner:
-        return redirect('index')
-    choice.delete()
-    messages.success(
-        request, "Choice Deleted successfully.", extra_tags='alert alert-success alert-dismissible fade show')
-    return redirect('edit', poll.id)    
-
-
-@login_required
-def choice_edit(request, choice_id):
-    choice = get_object_or_404(Choice, pk=choice_id)
-    poll = get_object_or_404(Poll, pk=choice.poll.id)
-    if request.user != poll.owner:
-        return redirect('index')
-
-    if request.method == 'POST':
-        form = ChoiceAddForm(request.POST, instance=choice)
-        if form.is_valid:
-            new_choice = form.save(commit=False)
-            new_choice.poll = poll
-            new_choice.save()
-            messages.success(
-                request, "Choice Updated successfully.", extra_tags='alert alert-success alert-dismissible fade show')
-            return redirect('edit', poll.id)
-             
-    else:
-        form = ChoiceAddForm(instance=choice)
-    context = {
-        'form': form,
-        'edit_choice': True,
-        'choice': choice,
-    }
-    return render(request, 'add_choice.html', context)
 
 
 
