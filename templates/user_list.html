@@ -21,7 +21,7 @@
 {% for poll in polls %}
    <tr>
    <td>{{ poll.id }}</td>
-   <td><a href="{% url 'poll_detail' poll.id %}">{{ poll.text|truncatewords:5}}</a>{% if request.user == poll.owner %}
+   <td><a href="#">{{ poll.text|truncatewords:5}}</a>{% if request.user == poll.owner %}
    {% if poll.active %}
       <a href="#" data-toggle="tooltip" data-placement="top" title="End Poll"
           onclick="return confirm('Are you sure ?')"><i class="fas fa-step-forward float-right btn btn-danger btn-sm">End</i></a>
