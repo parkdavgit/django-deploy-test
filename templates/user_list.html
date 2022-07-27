@@ -21,7 +21,7 @@
 {% for poll in polls %}
    <tr>
    <td>{{ poll.id }}</td>
-   <td><a href="#">{{ poll.text|truncatewords:5}}</a>{% if request.user == poll.owner %}
+   <td><a href="{% url 'detail' poll.id %}">{{ poll.text|truncatewords:5}">{{ poll.text|truncatewords:5}}</a>{% if request.user == poll.owner %}
    
    {% if poll.active %}
       <a href="#" data-toggle="tooltip" data-placement="top" title="End Poll"
@@ -44,5 +44,5 @@
    </table>
 
 </div>   
-<a class="btn btn-primary mb-3 float-right" href="{% url 'polls_add' %}" role="button">Add <i class="fas fa-plus"></i></a> 
+<a class="btn btn-primary mb-3 float-right" href="{% url 'polls_add' %}" role="button">Add Poll<i class="fas fa-plus"></i></a> 
 {% endblock %}
