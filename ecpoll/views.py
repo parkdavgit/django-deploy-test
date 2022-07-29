@@ -84,40 +84,24 @@ def poll_detail(request, poll_id):
 
 
 @login_required
-def add_choice(request, poll_id):
+def poll_vote(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
-    if request.user != poll.owner:
-        return redirect('index')
+    choice_id = request.POST.get('choice')
+    if not poll.user_can_vote(request.user):
+        messages.error(
+            request, "You already voted this poll!", extra_tags='alert alert-warning alert-dismissible fade show')
+        return redirect("user_list")
 
-    if request.method == 'POST':
-        form = ChoiceAddForm(request.POST)
-        if form.is_valid:
-            new_choice = form.save(commit=False)
-            new_choice.poll = poll
-            new_choice.save()
-            messages.success(
-                request, "Choice added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
-            return redirect('edit', poll.id)
-    else:
-        form = ChoiceAddForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'add_choice.html', context) 
-
-@login_required
-def endpoll(request, poll_id):
-    poll = get_object_or_404(Poll, pk=poll_id)
-    if request.user != poll.owner:
-        return redirect('home')
-
-    if poll.active is True:
-        poll.active = False
-        poll.save()
+    if choice_id:
+        choice = Choice.objects.get(id=choice_id)
+        vote = Vote(user=request.user, poll=poll, choice=choice)
+        vote.save()
+        print(vote)
         return render(request, 'poll_result.html', {'poll': poll})
     else:
-        return render(request, 'poll_result.html', {'poll': poll})  
+        messages.error(
+            request, "No choice selected!", extra_tags='alert alert-warning alert-dismissible fade show')
+        return redirect("detail", poll_id)
+    return render(request, 'poll_result.html', {'poll': poll})     
 
 
-
- 
