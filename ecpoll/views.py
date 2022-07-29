@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
-from .models import Poll, Choice
+from .models import Poll, Choice, Vote
 
 from .forms import PollAddForm,EditPollForm,ChoiceAddForm
 from django.contrib import messages
