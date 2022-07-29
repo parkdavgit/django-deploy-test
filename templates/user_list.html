@@ -23,7 +23,7 @@
    <td>{{ poll.id }}</td>
    <td><a href="#">{{ poll.text|truncatewords:5}}</a>{% if request.user == poll.owner %}
    {% if poll.active %}
-      <a href="{% url 'end_poll' poll.id %}" data-toggle="tooltip" data-placement="top" title="End Poll"
+      <a href="#" data-toggle="tooltip" data-placement="top" title="End Poll"
           onclick="return confirm('Are you sure ?')"><i class="fas fa-step-forward float-right btn btn-danger btn-sm">End</i></a>
       {% endif %} 
       <a href="#" class="mr-3" data-toggle="tooltip" data-placement="top"
