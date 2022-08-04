@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^polls_add/$', views.polls_add, name='polls_add'),
     url(r'^detail/(?P<poll_id>\d+)/$', views.poll_detail, name='detail'),
     url(r'^vote/(?P<poll_id>\d+)/$', views.poll_vote, name='vote'),
-    url(r'^end/(?P<poll_id>\d+)/$', views.endpoll, name='end_poll'),
+    url(r'^end_poll/(?P<poll_id>\d+)/$', views.endpoll, name='end_poll'),
    ] 
 
      
