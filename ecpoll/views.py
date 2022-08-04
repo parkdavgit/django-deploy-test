@@ -104,4 +104,15 @@ def poll_vote(request, poll_id):
         return redirect("detail", poll_id)
     return render(request, 'poll_result.html', {'poll': poll})     
 
+@login_required
+def endpoll(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('home')
 
+    if poll.active is True:
+        poll.active = False
+        poll.save()
+        return render(request, 'poll_result.html', {'poll': poll})
+    else:
+        return render(request, 'poll_result.html', {'poll': poll})  
