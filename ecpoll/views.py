@@ -116,3 +116,23 @@ def endpoll(request, poll_id):
         return render(request, 'poll_result.html', {'poll': poll})
     else:
         return render(request, 'poll_result.html', {'poll': poll})  
+
+
+@login_required
+def polls_edit(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('index')
+
+    if request.method == 'POST':
+        form = EditPollForm(request.POST, instance=poll)
+        if form.is_valid:
+            form.save()
+            messages.success(request, "Poll Updated successfully.",
+                             extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect("user_list")
+
+    else:
+        form = EditPollForm(instance=poll)
+
+    return render(request, "poll_edit.html", {'form': form, 'poll': poll})         
