@@ -28,7 +28,7 @@
                 </div>
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">Update</button>
-                <a class="btn btn-danger" href="#" role="button" onclick="return confirm('Are you sure?')">Delete Poll</a>
+                <a class="btn btn-danger" href="{% url 'delete_poll' poll.id %}" role="button" onclick="return confirm('Are you sure?')">Delete Poll</a>
                 <br>
                 <br>
                 <a class="btn btn-warning" href="#" role="button">Add Choice</a> 
