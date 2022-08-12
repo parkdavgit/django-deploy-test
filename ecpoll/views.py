@@ -146,3 +146,25 @@ def polls_delete(request, poll_id):
     messages.success(request, "Poll Deleted successfully.",
                      extra_tags='alert alert-success alert-dismissible fade show')
     return redirect("user_list") 
+
+@login_required
+def add_choice(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    if request.user != poll.owner:
+        return redirect('index')
+
+    if request.method == 'POST':
+        form = ChoiceAddForm(request.POST)
+        if form.is_valid:
+            new_choice = form.save(commit=False)
+            new_choice.poll = poll
+            new_choice.save()
+            messages.success(
+                request, "Choice added successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('edit', poll.id)
+    else:
+        form = ChoiceAddForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'add_choice.html', context) 
