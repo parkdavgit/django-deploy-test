@@ -47,7 +47,7 @@
                 <a class="btn btn-warning" href="#" role="button">Delete Choice</a> 
                 <ul class="list-group">
                     {% for choice in poll.choice_set.all %} 
-                    <li class="list-group-item"><a href="#"> {{ choice.choice_text }}</a>&nbsp</li>
+                    <li class="list-group-item"><a href="{% url 'choice_delete' choice.id %}"> {{ choice.choice_text }}</a>&nbsp</li>
                     {% endfor %}
                 </ul>
             
