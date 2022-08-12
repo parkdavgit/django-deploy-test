@@ -31,7 +31,7 @@
                 <a class="btn btn-danger" href="{% url 'delete_poll' poll.id %}" role="button" onclick="return confirm('Are you sure?')">Delete Poll</a>
                 <br>
                 <br>
-                <a class="btn btn-warning" href="#" role="button">Add Choice</a> 
+                <a class="btn btn-warning" href="{% url 'add_choice' poll.id %}" role="button">Add Choice</a> 
 
 
                 <br>
