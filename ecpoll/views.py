@@ -168,3 +168,14 @@ def add_choice(request, poll_id):
         'form': form,
     }
     return render(request, 'add_choice.html', context) 
+
+@login_required
+def choice_delete(request, choice_id):
+    choice = get_object_or_404(Choice, pk=choice_id)
+    poll = get_object_or_404(Poll, pk=choice.poll.id)
+    if request.user != poll.owner:
+        return redirect('index')
+    choice.delete()
+    messages.success(
+        request, "Choice Deleted successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+    return redirect('edit', poll.id)    
