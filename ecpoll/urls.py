@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^edit/(?P<poll_id>\d+)/choice/add/$', views.add_choice, name='add_choice'),
     url(r'^delete/choice/(?P<choice_id>\d+)/$',
          views.choice_delete, name='choice_delete'),
+    url(r'^edit/choice/(?P<choice_id>\d+)/$', views.choice_edit, name='choice_edit'),   
+     
 
 
    ] 

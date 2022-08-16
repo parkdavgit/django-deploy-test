@@ -179,3 +179,29 @@ def choice_delete(request, choice_id):
     messages.success(
         request, "Choice Deleted successfully.", extra_tags='alert alert-success alert-dismissible fade show')
     return redirect('edit', poll.id)    
+
+@login_required
+def choice_edit(request, choice_id):
+    choice = get_object_or_404(Choice, pk=choice_id)
+    poll = get_object_or_404(Poll, pk=choice.poll.id)
+    if request.user != poll.owner:
+        return redirect('index')
+
+    if request.method == 'POST':
+        form = ChoiceAddForm(request.POST, instance=choice)
+        if form.is_valid:
+            new_choice = form.save(commit=False)
+            new_choice.poll = poll
+            new_choice.save()
+            messages.success(
+                request, "Choice Updated successfully.", extra_tags='alert alert-success alert-dismissible fade show')
+            return redirect('edit', poll.id)
+             
+    else:
+        form = ChoiceAddForm(instance=choice)
+    context = {
+        'form': form,
+        'edit_choice': True,
+        'choice': choice,
+    }
+    return render(request, 'add_choice.html', context)    
