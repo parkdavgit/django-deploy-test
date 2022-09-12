@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^delete/choice/(?P<choice_id>\d+)/$',
          views.choice_delete, name='choice_delete'),
     url(r'^edit/choice/(?P<choice_id>\d+)/$', views.choice_edit, name='choice_edit'),   
-     
+    url(r'^user_search/$', views.user_search, name='user_search'), 
 
 
    ] 

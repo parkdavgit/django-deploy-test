@@ -204,4 +204,16 @@ def choice_edit(request, choice_id):
         'edit_choice': True,
         'choice': choice,
     }
-    return render(request, 'add_choice.html', context)    
+    return render(request, 'add_choice.html', context) 
+
+@login_required()
+def user_search(request):
+
+    user_name = request.POST.get('user_name', '').strip()
+    
+    polls = Poll.objects.filter(text=user_name)
+     
+    page = request.GET.get('page','1')
+    paginator = Paginator(polls, 4)
+    polls = paginator.get_page(page)
+    return render(request, 'user_list.html',{'polls':polls})

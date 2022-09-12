@@ -2,7 +2,15 @@
  
 {% block contents %}
 
+<form class="form-inline" method="post" action="{% url 'user_search' %}">
+   <!-- navbar-form avoid CSRF verification failed error. -->
+   {% csrf_token %}
+<div class="form-group">
+   <input name="user_name" type="text" placeholder="Poll Title" class="form-control" value="{{ search_user_name }}">
+</div>
+<button type="submit" class="btn btn-success">Search</button>
 
+</form>
  
 <div class="container my-3">
    <table class="table">
