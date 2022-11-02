@@ -19,10 +19,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('account/', include('account.urls')), ##
-    path('', include('ecpoll.urls')), ## 추가된 부분
-    path('admin/', admin.site.urls),
+    #path('account/', include('account.urls')), ##
+    path('', include('kid.urls')), ## 추가된 부분
+    #path('admin/', admin.site.urls),
     
     ]
 
- 
